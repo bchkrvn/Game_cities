@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{%block title %}
+Рейтинг
+{% endblock %}
+
+{%block body %}
+<h3>Лучшие игроки</h3>
+<br>
+{% for result in results %}
+<p>{{result[0]}} место - {{result[1]}}. Количество баллов: {{result[2]}}<p></p>
+{%endfor%}
+<br>
+<p><a href="/">Вернутся на главную</a></p>
+{% endblock %}
