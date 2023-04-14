@@ -5,4 +5,4 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . /HW_26
 
-CMD flask --app /HW_26/app.py run -h 0.0.0.0 -p 80
+CMD python3 -m gunicorn /HW_26/app:app -b 0.0.0.0:80 -w 1 --threads 4
