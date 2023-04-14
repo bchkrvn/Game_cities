@@ -8,4 +8,4 @@ services:
     ports:
       - 80:80
     volumes:
-      - data:/var/lib/results/
+      - ./code/data:/var/lib/results/
