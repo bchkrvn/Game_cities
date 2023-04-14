@@ -5,3 +5,5 @@ services:
     image: bchkrvn/hw_26:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     ports:
       - 80:80
+    volumes:
+      - ./data:/var/lib/results/
