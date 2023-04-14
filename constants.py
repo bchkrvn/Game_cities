@@ -1,3 +1,3 @@
-CITIES_PATH = "/HW_26/data/cities.json"
-RESULTS_PATH = "/HW_26/data/results.json"
+CITIES_PATH = "./data/cities.json"
+RESULTS_PATH = "./data/results.json"
 BAD_LETTERS = ('ё', 'ъ', 'ы', 'ь', 'й', 'ц')
