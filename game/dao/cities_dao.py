@@ -99,8 +99,13 @@ class CitiesDAO:
         return results
 
     def get_results(self):
-        with open(self.path_result, encoding='utf-8') as file:
-            results = json.load(file)
+        try:
 
-        results.sort(key=lambda result: result[1], reverse=True)
-        return [[i, *result] for i, result in enumerate(results, 1)]
+            with open(self.path_result, encoding='utf-8') as file:
+                results = json.load(file)
+
+            results.sort(key=lambda result: result[1], reverse=True)
+            return [[i, *result] for i, result in enumerate(results, 1)]
+
+        except FileNotFoundError:
+            return []
