@@ -7,5 +7,3 @@ services:
     image: bchkrvn/hw_26
     ports:
       - 80:80
-    volumes:
-      - ./data:/var/lib/docker/volumes/result
