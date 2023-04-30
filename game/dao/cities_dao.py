@@ -4,7 +4,7 @@ import random
 from constants import CITIES_PATH, RESULTS_PATH, BAD_LETTERS
 
 
-class CitiesDAO:
+class CitiesDAOold:
 
     def __init__(self):
         self.cities_path = CITIES_PATH

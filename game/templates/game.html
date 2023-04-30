@@ -9,15 +9,17 @@
 <p><strong>Цель игры<strong></strong> - поочереди называть российские города на последнюю букву последнего города</p>
 </br>
 
-{%for player, city in cities%}
+{%for player, city in data.used_cities%}
 <p><strong>{{player}}:</strong> {{city}}</p>
 {%endfor%}
-<p>Введите город на букву "{{last_letter}}"</p>
-
-<form action="/user_city">
+<p>Введите город на букву "{{data.letter}}"</p>
+<form action="/game" method="POST">
     <input type="text" width="40" name="user_city" placeholder="Ваш город">
     <input type="submit" value="Ответить">
 </form>
+    {% if data.error %}
+    <p><strong>{{data.error}}</strong> {{city}}</p>
+    {% endif %}
 
 <h5><a href="/game_over">Закончить игру</a></h5>
 {% endblock %}

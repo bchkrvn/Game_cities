@@ -1,69 +1,51 @@
 from flask import Blueprint, render_template, request, redirect
-from .dao.cities_dao import CitiesDAO
+
+from container import game
+from exceptions import UsedCity, IsNotCity, WrongLetter, NotAlpha
+from .dao.cities_dao import CitiesDAOold
 from .dao.game_dao import GameDAO
 
 game_blueprint = Blueprint('game_blueprint', __name__, template_folder='templates')
 
-cities_dao = CitiesDAO()
+cities_dao = CitiesDAOold()
 
 
-@game_blueprint.route('/user_name')
+@game_blueprint.get('/user_name')
+def get_username():
+    return render_template('user_name.html')
+
+
+@game_blueprint.post('/user_name')
+def post_username():
+    username = request.values.get('user_name')
+    game.set_user(username.capitalize())
+    # user = GameDAO(user_name.capitalize())
+    # cities_dao.add_player(user)
+    return redirect('/start_game')
+
+
+@game_blueprint.route('/start_game')
 def start_game():
-    user_name = request.args.get('user_name')
-    if user_name:
-        user = GameDAO(user_name.capitalize())
-        cities_dao.add_player(user)
-        return redirect('/game')
-    else:
-        return render_template('user_name.html')
+    data_for_template = game.get_first_data()
+    return render_template('game.html', data=data_for_template)
 
 
-@game_blueprint.route('/game')
-def game():
-    user = cities_dao.get_player()
-    if user.is_new_game():
-        first_city = cities_dao.get_first_city()
-        user.add_city(first_city)
-
-    cities = user.get_used_cities()
-    cities_for_game = cities_dao.get_cities_for_game(cities)
-
-    last_letter = cities_dao.get_last_letter(cities[-1])
-
-    return render_template('game.html', cities=cities_for_game, last_letter=last_letter)
-
-
-@game_blueprint.route('/user_city')
+@game_blueprint.post('/game')
 def user_answer():
-    user_city = request.args.get('user_city')
-    user_city = user_city.capitalize()
+    user_city = request.values.get('user_city').capitalize()
 
-    if not user_city.isalpha():
-        message = 'Город должен состоять из букв, попробуйте еще раз'
-        return render_template('error.html', message=message)
+    try:
+        game.validate_user_city(user_city)
+    except (NotAlpha, UsedCity, IsNotCity, WrongLetter) as e:
+        data_for_template = game.get_data_error()
+        data_for_template['error'] = e.message
+        return render_template('game.html', data=data_for_template)
+        # return render_template('error.html', message=e.message)
 
-    if not cities_dao.is_city(user_city):
-        message = 'Вы ввели не город, попробуйте еще раз'
-        return render_template('error.html', message=message)
+    game.add_city_to_used(user_city)
+    data_for_template = game.get_data()
 
-    user = cities_dao.get_player()
-    if user.is_used_city(user_city):
-        message = 'Этот город уже был, попробуйте еще раз'
-        return render_template('error.html', message=message)
-
-    last_city = user.get_used_cities()[-1]
-    last_letter = cities_dao.get_last_letter(last_city)
-
-    if not user_city[0].lower() == last_letter:
-        message = f'Вам нужно ввести город на букву {last_letter.upper()}, попробуйте еще раз'
-        return render_template('error.html', message=message)
-
-    user_last_letter = cities_dao.get_last_letter(user_city)
-
-    program_city = cities_dao.get_city(user_last_letter, user.get_used_cities())
-    user.add_used_city(user_city, program_city)
-
-    return redirect('/game')
+    return render_template('game.html', data=data_for_template)
 
 
 @game_blueprint.route('/game_over')

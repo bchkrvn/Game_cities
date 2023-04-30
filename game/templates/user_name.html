@@ -5,9 +5,9 @@
 {% endblock %}
 
 {%block body %}
-<h3>Введите ваше имя:</h3>
-<form action="/user_name">
-<input name="user_name" placeholder="Петя" type="text">
+<h3>Введите Ваше имя:</h3>
+<form method="POST" action="/user_name">
+<input name="user_name" required placeholder="Петя" type="text" >
     <input type="submit" value="Начать игру">
 
 </form>
