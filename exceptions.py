@@ -1,6 +1,7 @@
 class NotAlpha(Exception):
-    def __init__(self, city):
+    def __init__(self):
         self.message = f'Название города должно состоять из букв'
+
 
 class UsedCity(Exception):
     def __init__(self, city):

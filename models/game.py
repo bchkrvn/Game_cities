@@ -1,13 +1,15 @@
 from constants import BAD_LETTERS
 from exceptions import UsedCity, IsNotCity, WrongLetter, NotAlpha
 from game.dao.cities import CitiesDAO
+from models.result import ResultsDAO
 from models.user import User
 
 
 class Game:
-    def __init__(self, cities_dao: CitiesDAO):
+    def __init__(self, cities_dao: CitiesDAO, results_dao: ResultsDAO):
         self._cities_dao = cities_dao
-        self._user = None
+        self._user: None or User = None
+        self._results_dao = results_dao
 
     def set_user(self, username: str) -> None:
         self._user = User(username=username, used_cities=list())
@@ -25,7 +27,7 @@ class Game:
 
     def validate_user_city(self, user_city: str) -> None:
         if not user_city.isalpha():
-            raise NotAlpha('Город должен состоять из букв, попробуйте еще раз')
+            raise NotAlpha()
 
         if user_city in self._user.used_cities:
             raise UsedCity(user_city)
@@ -42,21 +44,21 @@ class Game:
     def add_city_to_used(self, city: str) -> None:
         self._user.used_cities.append(city)
 
-    def get_data(self) -> dict:
+    def get_data(self) -> dict or None:
         data = {}
         last_city = self.get_last_city()
         letter = self.get_last_letter(last_city)
         cities_by_letter = self._cities_dao.get_shuffle_cities_by_letter(letter)
+
         for city in cities_by_letter:
             if city not in self._user.used_cities:
                 self._user.used_cities.append(city)
                 data['letter'] = self.get_last_letter(city)
                 break
         else:
-            pass
+            return None
 
         data['used_cities'] = self.get_used_cities_for_data()
-
         return data
 
     def get_data_error(self) -> dict:
@@ -86,3 +88,14 @@ class Game:
                 results.append(['Вы', city])
 
         return results
+
+    def end_game(self):
+        points = self._user.get_result()
+        username = self._user.username
+        self._results_dao.save_result(username, points)
+        data = {'username': username,
+                'result': points}
+        return data
+
+    def get_results(self):
+        return self._results_dao.get_results()

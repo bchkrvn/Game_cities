@@ -4,3 +4,4 @@ __pycache__/
 .env
 .log
 __pycache__
+data/results.json

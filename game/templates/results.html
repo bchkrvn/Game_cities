@@ -7,8 +7,8 @@
 {%block body %}
 <h3>Лучшие игроки</h3>
 <br>
-{% for result in results %}
-<p>{{result[0]}} место - {{result[1]}}. Количество баллов: {{result[2]}}<p></p>
+{% for result in data %}
+<p>{{loop.index}} место - {{result["username"]}}. Количество баллов: {{result["points"]}}<p></p>
 {%endfor%}
 <br>
 <p><a href="/">Вернутся на главную</a></p>
