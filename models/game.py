@@ -1,4 +1,4 @@
-from constants import BAD_LETTERS
+from constants import BAD_LETTERS, RUSSIAN_LETTERS
 from exceptions import UsedCity, IsNotCity, WrongLetter, NotAlpha
 from game.dao.cities import CitiesDAO
 from models.result import ResultsDAO
@@ -21,23 +21,24 @@ class Game:
         return self._user.used_cities[-1]
 
     def get_last_letter(self, city: str) -> str:
+        city.lower()
         for i in range(1, len(city)):
             if city[-i] not in BAD_LETTERS:
                 return city[-i]
 
     def validate_user_city(self, user_city: str) -> None:
-        if not user_city.isalpha():
+        if not set(user_city) <= RUSSIAN_LETTERS:
             raise NotAlpha()
-
-        if user_city in self._user.used_cities:
-            raise UsedCity(user_city)
 
         if not self._cities_dao.is_city(user_city):
             raise IsNotCity(user_city)
 
+        if user_city in self._user.used_cities:
+            raise UsedCity(user_city)
+
         last_city = self.get_last_city()
         last_letter = self.get_last_letter(last_city)
-        user_city_first_letter = user_city[0].lower()
+        user_city_first_letter = user_city[0]
         if last_letter != user_city_first_letter:
             raise WrongLetter(user_city_first_letter, last_letter)
 
@@ -59,7 +60,7 @@ class Game:
             return None
 
         data['used_cities_and_players'] = self.get_used_cities_and_players_for_data()
-        data['used_cities'] = self._user.used_cities
+        data['used_cities'] = list(map(lambda x: x.capitalize(), self._user.used_cities))
         return data
 
     def get_data_error(self) -> dict:
@@ -73,22 +74,24 @@ class Game:
         return data
 
     def get_first_data(self) -> dict:
+        if self._user.used_cities:
+            return self.get_data_error()
+
         data = {}
         first_city = self._cities_dao.get_random_city()
         self._user.used_cities.append(first_city)
         data['letter'] = self.get_last_letter(first_city).upper()
         data['used_cities_and_players'] = self.get_used_cities_and_players_for_data()
         data['used_cities'] = self._user.used_cities
-
         return data
 
     def get_used_cities_and_players_for_data(self):
         results = []
         for i, city in enumerate(self._user.used_cities[-6:]):
             if i % 2 == 0:
-                results.append(['Компьютер', city])
+                results.append(['Компьютер', city.capitalize()])
             else:
-                results.append(['Вы', city])
+                results.append(['Вы', city.capitalize()])
 
         return results
 

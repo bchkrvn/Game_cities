@@ -1,16 +1,16 @@
 class NotAlpha(Exception):
     def __init__(self):
-        self.message = f'Название города должно состоять из букв'
+        self.message = f'Название города должно состоять из русских букв'
 
 
 class UsedCity(Exception):
     def __init__(self, city):
-        self.message = f'Город {city} уже был использован в этой игре'
+        self.message = f'Город {city.capitalize()} уже был использован в этой игре'
 
 
 class IsNotCity(Exception):
     def __init__(self, city):
-        self.message = f'{city} не является российским городом'
+        self.message = f'{city.capitalize()} не является российским городом'
 
 
 class WrongLetter(Exception):

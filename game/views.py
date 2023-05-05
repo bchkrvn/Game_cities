@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, request, redirect
 
 from container import game
 from exceptions import UsedCity, IsNotCity, WrongLetter, NotAlpha
-game_blueprint = Blueprint('game_blueprint', __name__, template_folder='templates')
 
+game_blueprint = Blueprint('game_blueprint', __name__, template_folder='templates')
 
 
 @game_blueprint.get('/user_name')
@@ -26,7 +26,7 @@ def start_game():
 
 @game_blueprint.post('/game')
 def user_answer():
-    user_city = request.values.get('user_city').capitalize()
+    user_city = request.values.get('user_city').lower()
 
     try:
         game.validate_user_city(user_city)
