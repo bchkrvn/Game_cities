@@ -5,7 +5,7 @@ class NotAlpha(Exception):
 
 class UsedCity(Exception):
     def __init__(self, city):
-        self.message = f'{city} уже был использован в этой игре'
+        self.message = f'Город {city} уже был использован в этой игре'
 
 
 class IsNotCity(Exception):

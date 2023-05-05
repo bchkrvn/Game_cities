@@ -4,18 +4,19 @@ from typing import Type
 
 class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    DEBUG = False
+
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_ECHO = True
 
 
 class ProductionConfig(Config):
     DEBUG = False
-    SQLALCHEMY_ECHO = False
+
 
 class ConfigFactory:
-    flask_env = os.getenv('FLASK_ENV')
+    flask_env = os.getenv('FLASK_ENV', 'development')
     print(flask_env)
 
     @classmethod

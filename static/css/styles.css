@@ -1,0 +1,242 @@
+body {
+    background-color: powderblue;
+}
+
+/*Главная страница*/
+h1.main {
+    color: black;
+    font-family: verdana;
+    font-size: 250%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20em
+}
+h3.main {
+    color: black;
+    font-family: verdana;
+    font-size: 150%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20em
+}
+h2.main {
+    font-family: verdana;
+    font-size: 200%;
+    text-align: center;
+}
+a.main {
+    color: darkslategray;
+    font-family: verdana;
+}
+img.main {
+    border-radius: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    height: 40%
+}
+
+/*Страница ввода имени пользователя*/
+h3.username {
+    color: black;
+    font-family: verdana;
+    font-size: 200%;
+    text-align: center;
+}
+
+h4.username {
+    color: darkslategray;
+    font-family: verdana;
+    font-size: 150%;
+    text-align: left;
+    margin: 30px;
+}
+
+form.username{
+    display: block;
+    text-align: center;
+}
+input[type=text].username {
+    background-color: white;
+    border: 2px solid darkturquoise;
+    border-radius: 4px;
+    padding: 16px 32px;
+    font-size: 150%;
+}
+input[type=submit].username {
+    background-color: deepskyblue;
+    border: none;
+    color: white;
+    font-size: 150%;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/*Страница игры*/
+h1.game {
+    color: #004fff;
+    font-family: verdana;
+    font-size: 350%;
+    text-align: center;
+}
+h2.game {
+    color: #505050;
+    font-family: verdana;
+    font-size: 150%;
+    text-align: center
+}
+h3.game {
+    color: #008fff;
+    font-family: verdana;
+    font-size: 200%;
+    text-align: center
+}
+h5.game {
+    color: deepskyblue;
+    font-family: verdana;
+    font-size: 150%;
+    text-align: center;
+}
+p.game  {
+    color: #303030;
+    font-family: verdana;
+    font-size: 150%;
+    font-weight: 500;
+    border: 2px solid powderblue;
+    margin: 10px;
+    text-align: center
+}
+form.game{
+    display: block;
+    text-align: center;
+}
+input[type=text].game {
+    background-color: white;
+    border: 2px solid darkturquoise;
+    border-radius: 4px;
+    padding: 16px 32px;
+    font-size: 150%;
+}
+input[type=submit].game {
+    background-color: deepskyblue;
+    border: none;
+    color: white;
+    font-size: 150%;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: verdana;
+    text-decoration: none;
+}
+p.game_error  {
+    color: indianred;
+    font-family: verdana;
+    font-size: 150%;
+    border: 2px solid powderblue;
+    margin: 10px;
+    text-align: center
+}
+
+a.button {
+    display: inline-block;
+    background: deepskyblue;
+    font-family: verdana;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+p  {
+    color: #303030;
+    font-family: verdana;
+    font-size: 100%;
+    border: 2px solid powderblue;
+    margin: 10px;
+    text-align: center
+}
+
+.textcols {
+	overflow: hidden;
+}
+.textcols-left {
+	float: left;
+    height: 370px;
+	width: 48%;
+
+}
+.textcols-right {
+	float: right;
+	width: 48%;
+    height: 370px;
+}
+
+/*Страница окончания игры*/
+h1.game_over {
+    color: blueviolet;
+    font-family: verdana;
+    font-size: 350%;
+    text-align: center;
+}
+h2.game_over {
+    color: cornflowerblue;
+    font-family: verdana;
+    font-size: 300%;
+    text-align: center;
+}
+h2.game_over_result {
+    color: darkslateblue;
+    font-family: verdana;
+    font-size: 500%;
+    text-align: center;
+}
+h5.game_over {
+    font-family: verdana;
+    text-align: center;
+    font-size: 200%;
+}
+
+
+/*Страница результатов*/
+.textcols_results {
+	overflow: hidden;
+}
+.textcols-left_results {
+	float: left;
+    height: 425px;
+	width: 48%;
+
+}
+.textcols-right_results {
+	float: right;
+	width: 48%;
+    height: 425px;
+}
+h1.results {
+    color: dodgerblue;
+    font-family: verdana;
+    font-size: 250%;
+    text-align: center;
+}
+p.results_top3  {
+    color: #303030;
+    font-family: verdana;
+    font-size: 250%;
+    border: 2px solid powderblue;
+    margin: 10px;
+    text-align: center
+}
+
+p.results_top10  {
+    color: #303030;
+    font-family: verdana;
+    font-size: 150%;
+    border: 2px solid powderblue;
+    margin: 10px;
+    text-align: center
+}

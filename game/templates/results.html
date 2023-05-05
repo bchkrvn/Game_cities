@@ -5,11 +5,20 @@
 {% endblock %}
 
 {%block body %}
-<h3>Лучшие игроки</h3>
+<h1 class="results">Лучшие игроки</h1>
 <br>
-{% for result in data %}
-<p>{{loop.index}} место - {{result["username"]}}. Количество баллов: {{result["points"]}}<p></p>
+    <div class="textcols_results">
+    <div class="textcols-right_results">
+{% for result in data.top10 %}
+    <p class="results_top10"><strong>{{loop.index + 3}} место</strong> - {{result["username"]}}. Баллы: {{result["points"]}}<p></p>
 {%endfor%}
+    </div>
+    <div class="textcols-left_results">
+{% for result in data.top3 %}
+    <p class="results_top3"><strong>{{loop.index}} место</strong><br> {{result["username"]}}: {{result["points"]}} баллов<p></p>
+{%endfor%}
+    </div>
+    </div>
 <br>
-<p><a href="/">Вернутся на главную</a></p>
+<h2 class="main"><a class="button" href="/">Вернутся на главную</a></h2>
 {% endblock %}

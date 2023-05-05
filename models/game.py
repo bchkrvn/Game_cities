@@ -53,20 +53,22 @@ class Game:
         for city in cities_by_letter:
             if city not in self._user.used_cities:
                 self._user.used_cities.append(city)
-                data['letter'] = self.get_last_letter(city)
+                data['letter'] = self.get_last_letter(city).upper()
                 break
         else:
             return None
 
-        data['used_cities'] = self.get_used_cities_for_data()
+        data['used_cities_and_players'] = self.get_used_cities_and_players_for_data()
+        data['used_cities'] = self._user.used_cities
         return data
 
     def get_data_error(self) -> dict:
         data = {}
         last_city = self.get_last_city()
         letter = self.get_last_letter(last_city)
-        data['letter'] = letter
-        data['used_cities'] = self.get_used_cities_for_data()
+        data['letter'] = letter.upper()
+        data['used_cities_and_players'] = self.get_used_cities_and_players_for_data()
+        data['used_cities'] = self._user.used_cities
 
         return data
 
@@ -74,14 +76,15 @@ class Game:
         data = {}
         first_city = self._cities_dao.get_random_city()
         self._user.used_cities.append(first_city)
-        data['letter'] = self.get_last_letter(first_city)
-        data['used_cities'] = self.get_used_cities_for_data()
+        data['letter'] = self.get_last_letter(first_city).upper()
+        data['used_cities_and_players'] = self.get_used_cities_and_players_for_data()
+        data['used_cities'] = self._user.used_cities
 
         return data
 
-    def get_used_cities_for_data(self):
+    def get_used_cities_and_players_for_data(self):
         results = []
-        for i, city in enumerate(self._user.used_cities):
+        for i, city in enumerate(self._user.used_cities[-6:]):
             if i % 2 == 0:
                 results.append(['Компьютер', city])
             else:
@@ -98,4 +101,9 @@ class Game:
         return data
 
     def get_results(self):
-        return self._results_dao.get_results()
+        results = self._results_dao.get_results()
+        data = {
+            'top3': results[:3],
+            'top10': results[3:10]
+        }
+        return data

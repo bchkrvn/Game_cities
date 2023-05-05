@@ -5,10 +5,19 @@
 {% endblock %}
 
 {%block body %}
-<h3>Введите Ваше имя:</h3>
-<form method="POST" action="/user_name">
-<input name="user_name" required placeholder="Петя" type="text" >
-    <input type="submit" value="Начать игру">
-
+<h3 class="username">Введите Ваше имя:</h3>
+<form class="username" method="POST" action="/user_name">
+<input class="username" name="user_name" required  type="text" >
+    <input class="username" type="submit" value="Начать игру">
 </form>
+    <br>
+    <h3 class="username"> Правила игры: </h3>
+    <h4 class="username">1) Начинается игра с города от компьютера</h4>
+    <h4 class="username">2) Вам нужно назвать реальный российский город, название которого начинается на букву,
+        которой заканчивается название города от компьютера
+        <br>(Например: МосквА-АнапА-АгриджентО-ОмсК и т.д.)</h4>
+    <h4 class="username">3) Запрещается повторение городов.</h4>
+    <h4 class="username">4) Названий городов на буквы: 'ё', 'ъ', 'ы', 'ь', 'й', 'ц', 'е' очень мало, поэтому они не участвуют в игре.
+        Из-за этого мы пропускаем эти буквы, и Вам нужно назвать город на букву стоящую перед этими буквами</h4>
+
 {% endblock %}

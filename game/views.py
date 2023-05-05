@@ -2,11 +2,8 @@ from flask import Blueprint, render_template, request, redirect
 
 from container import game
 from exceptions import UsedCity, IsNotCity, WrongLetter, NotAlpha
-from .dao.cities_dao import CitiesDAOold
-
 game_blueprint = Blueprint('game_blueprint', __name__, template_folder='templates')
 
-cities_dao = CitiesDAOold()
 
 
 @game_blueprint.get('/user_name')

@@ -16,6 +16,6 @@ class Cities:
     def get_all_cities(self) -> dict:
         return self._cities
 
-    def get_cities_by_letter(self, letter: str) -> list:
-        return self._cities[letter.upper()]
+    def get_cities_by_letter(self, letter: str) -> list or None:
+        return self._cities.get(letter.upper(), None)
 

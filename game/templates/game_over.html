@@ -5,8 +5,9 @@
 {% endblock %}
 
 {%block body %}
-<h2>Игра окончена!</h2>
-<h4>{{data.username}}, количество твоих баллов - {{data.result}}</h4>
-<h5><a href="/user_name">Начать сначала</a></h5>
-<h5><a href="/">Вернуться на главную</a></h5>
+<h1 class="game_over">Игра окончена!</h1>
+<h2 class="game_over">{{data.username}}, количество твоих баллов:</h2>
+<h2 class="game_over_result">{{data.result}}</h2>
+<h5 class="game_over"><a class="button" href="/user_name">Начать сначала</a></h5>
+<h5 class="game_over"><a class="button" href="/">Вернуться на главную</a></h5>
 {% endblock %}
