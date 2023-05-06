@@ -1,9 +1,10 @@
 import json
 
 from constants import CITIES_PATH
+from models.base_singltone import BaseSingleton
 
 
-class Cities:
+class Cities(metaclass=BaseSingleton):
     def __init__(self):
         self._cities = self._load_cities()
 

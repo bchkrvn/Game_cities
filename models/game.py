@@ -6,10 +6,10 @@ from models.user import User
 
 
 class Game:
-    def __init__(self, cities_dao: CitiesDAO, results_dao: ResultsDAO):
-        self._cities_dao = cities_dao
+    def __init__(self):
+        self._cities_dao = CitiesDAO()
         self._user: None or User = None
-        self._results_dao = results_dao
+        self._results_dao = ResultsDAO()
 
     def set_user(self, username: str) -> None:
         self._user = User(username=username, used_cities=list())
@@ -69,7 +69,7 @@ class Game:
         letter = self.get_last_letter(last_city)
         data['letter'] = letter.upper()
         data['used_cities_and_players'] = self.get_used_cities_and_players_for_data()
-        data['used_cities'] = self._user.used_cities
+        data['used_cities'] = list(map(lambda x: x.capitalize(), self._user.used_cities))
 
         return data
 
@@ -82,7 +82,7 @@ class Game:
         self._user.used_cities.append(first_city)
         data['letter'] = self.get_last_letter(first_city).upper()
         data['used_cities_and_players'] = self.get_used_cities_and_players_for_data()
-        data['used_cities'] = self._user.used_cities
+        data['used_cities'] = list(map(lambda x: x.capitalize(), self._user.used_cities))
         return data
 
     def get_used_cities_and_players_for_data(self):
