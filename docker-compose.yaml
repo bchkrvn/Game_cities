@@ -4,6 +4,8 @@ services:
   api:
     build:
       context: .
-    image: bchkrvn/hw_26
+    image: bchkrvn/hw_26d
+    environment:
+      FLASK_ENV: production
     ports:
       - 80:80
