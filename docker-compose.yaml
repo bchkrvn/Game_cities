@@ -8,4 +8,4 @@ services:
     environment:
       FLASK_ENV: production
     ports:
-      - 80:80
+      - 80:8000

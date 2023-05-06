@@ -32,4 +32,9 @@ class ResultsDAO:
 
         results.sort(key=lambda x: x['points'], reverse=True)
 
-        return results
+        data = {
+            'top3': results[:3],
+            'top10': results[3:10]
+        }
+
+        return data
